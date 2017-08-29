@@ -34,6 +34,7 @@ namespace Plenum_1.Controllers
         public ActionResult SlettKunde(int id)
         {
             var db = new DB();
+            //TOO MANY BICHES
             db.Kunder.Remove(db.Kunder.Find(id));
             db.SaveChanges();
 
