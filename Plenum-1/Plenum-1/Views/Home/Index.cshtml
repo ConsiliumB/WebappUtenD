@@ -1,0 +1,21 @@
+﻿@model  IEnumerable<Plenum_1.Models.Kunde>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+Her er kundene : <br/>
+<table class="table">
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>ID : </td><td>@k.Id</td>
+            <td>Navn : </td><td>@k.Navn</td>
+            <td>Adresse : </td><td>@k.Adresse</td>
+            <td><a href="/home/slettkunde?id=@k.Id" class="btn btn-danger">Slett</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Home/RegKunde" class="btn btn-primary">Reg kunde</a>
+

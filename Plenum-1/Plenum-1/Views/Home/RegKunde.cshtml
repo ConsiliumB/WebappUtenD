@@ -1,0 +1,20 @@
+﻿@model  Plenum_1.Models.Kunde
+@{
+    ViewBag.Title = "RegKunde";
+}
+
+<h2>RegKunde</h2>
+<form action="/Home/RegKunde" method="post">
+    <table>
+        <tr>
+            <td> Navn :</td><td><input type="text" name="Navn" /></td>
+        </tr>
+        <tr>
+            <td>Adresse :</td><td> <input type="text" name="Adresse" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="Reg" value="Registrer kunde" class="btn btn-default" /></td>
+        </tr>
+    </table>
+</form>
+<a href="/Home/Index" class="btn btn-primary">Vis kunder</a>
