@@ -1,2 +1,2 @@
-# WebappUtenD
-Fordi DB er for langt
+# Webapps
+Repo for ukesoppgaver og misc
