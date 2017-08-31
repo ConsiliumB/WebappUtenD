@@ -1,0 +1,31 @@
+﻿@model IEnumerable<HolbergsPizza.Models.Bestilling>
+
+@{
+    ViewBag.Title = "Bestillinger";
+}
+
+<h2>Bestillinger</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pizza: </th>
+            <th>Tykkelse: </th>
+            <th>Antall: </th>
+            <th>Navn: </th>
+            <th>Adresse: </th>
+            <th>Tlf: </th>
+        </tr>
+    </thead>
+    @foreach (var bestilling in Model)
+    {
+        <tr>
+            <td>@bestilling.Pizza</td>
+            <td>@bestilling.Tykkelse</td>
+            <td>@bestilling.Antall</td>
+            <td>@bestilling.Navn</td>
+            <td>@bestilling.Adresse</td>
+            <td>@bestilling.Tlf</td>
+        </tr>
+    }
+</table>

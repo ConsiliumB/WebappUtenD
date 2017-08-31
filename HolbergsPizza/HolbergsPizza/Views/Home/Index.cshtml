@@ -1,0 +1,54 @@
+﻿@model HolbergsPizza.Models.Bestilling
+
+@{
+    ViewBag.Title = "Holbergs Pizza";
+}
+
+<h2>Bestill Pizza</h2>
+
+<form action="/Home/Bestill" method="post">
+    <div class="form-group">
+        <label for="pizza">Velg Pizza: </label>
+        <select class="form-control" name="pizza">
+            <option>Margarita</option>
+            <option>Hawaii</option>
+            <option>Big American</option>
+            <option>Fromaggio</option>
+            <option>Triple Meat</option>
+            <option>Mystery Mix</option>
+        </select>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <label>
+            <input class="form-check" type="radio" name="tykkelse" value="Tykk"> Tykk
+        </label>
+        <label>
+            <input class="form-check" type="radio" name="tykkelse" value="Tynn"> Tynn
+        </label>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="antall">Antall: </label>
+        <input class="form-control" type="text" name="antall" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="navn">Navn: </label>
+        <input class="form-control" type="text" name="navn" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="adresse">Adresse: </label>
+        <input class="form-control" type="text" name="adresse" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="tlf">Telefon: </label>
+        <input class="form-control" type="text" name="tlf" />
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary">Bestill</button>
+</form>
