@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HolbergsPizza.Models.Bestilling>
+﻿@model List<HolbergsPizza.Models.Ordre>
 
 @{
     ViewBag.Title = "Bestillinger";
@@ -17,15 +17,16 @@
             <th>Tlf: </th>
         </tr>
     </thead>
-    @foreach (var bestilling in Model)
+    @foreach (var ordre in Model)
     {
         <tr>
-            <td>@bestilling.Pizza</td>
-            <td>@bestilling.Tykkelse</td>
-            <td>@bestilling.Antall</td>
-            <td>@bestilling.Navn</td>
-            <td>@bestilling.Adresse</td>
-            <td>@bestilling.Tlf</td>
+            <td>@ordre.Type</td>
+            <td>@ordre.Tykkelse</td>
+            <td>@ordre.Antall</td>
+            <td>@ordre.Kunde.Navn</td>
+            <td>@ordre.Kunde.Adresse</td>
+            <td>@ordre.Kunde.Tlf</td>
+            <td><a href="/Home/SlettBestilling?id=@ordre.Id" class="btn btn-danger">Slett</a></td>
         </tr>
     }
 </table>

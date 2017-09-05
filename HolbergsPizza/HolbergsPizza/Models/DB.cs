@@ -15,7 +15,7 @@ namespace HolbergsPizza.Models
         }
 
         public DbSet<Kunde> Kunder { get; set; }
-        public DbSet<Bestilling> Bestillinger { get; set; }
+        public DbSet<Ordre> Ordrer { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

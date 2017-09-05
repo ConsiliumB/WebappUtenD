@@ -1,4 +1,4 @@
-﻿@model HolbergsPizza.Models.Bestilling
+﻿@model HolbergsPizza.Models.Ordre
 
 @{
     ViewBag.Title = "Holbergs Pizza";
@@ -9,7 +9,7 @@
 <form action="/Home/Bestill" method="post">
     <div class="form-group">
         <label for="pizza">Velg Pizza: </label>
-        <select class="form-control" name="pizza">
+        <select class="form-control" name="type">
             <option>Margarita</option>
             <option>Hawaii</option>
             <option>Big American</option>
@@ -31,22 +31,22 @@
     <br />
     <div class="form-group">
         <label for="antall">Antall: </label>
-        <input class="form-control" type="text" name="antall" />
+        <input class="form-control" type="number" min="1" name="antall" />
     </div>
     <br />
     <div class="form-group">
         <label for="navn">Navn: </label>
-        <input class="form-control" type="text" name="navn" />
+        <input class="form-control" type="text" name="kunde.navn" />
     </div>
     <br />
     <div class="form-group">
         <label for="adresse">Adresse: </label>
-        <input class="form-control" type="text" name="adresse" />
+        <input class="form-control" type="text" name="kunde.adresse" />
     </div>
     <br />
     <div class="form-group">
         <label for="tlf">Telefon: </label>
-        <input class="form-control" type="text" name="tlf" />
+        <input class="form-control" type="text" name="kunde.tlf" />
     </div>
     <br />
 

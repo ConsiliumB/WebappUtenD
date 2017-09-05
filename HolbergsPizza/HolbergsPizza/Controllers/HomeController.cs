@@ -19,31 +19,44 @@ namespace HolbergsPizza.Controllers
         public ActionResult Bestillinger()
         {
             var db = new DB();
-            IEnumerable<Bestilling> bestillinger = db.Bestillinger;
-            return View(bestillinger);
+            List<Ordre> Ordrer = db.Ordrer.ToList();
+            return View(Ordrer);
+        }
+
+        public ActionResult SlettBestilling(int id)
+        {
+            var db = new DB();
+            db.Ordrer.Remove(db.Ordrer.Find(id));
+            db.SaveChanges();
+            return RedirectToAction("Bestillinger");
         }
 
         [HttpPost]
-        public ActionResult Bestill(Bestilling innBestilling)
+        public ActionResult Bestill(Ordre innBestilling)
         {
             var db = new DB();
-            var eksisterendeKunde = db.Kunder.Where(p => p.Navn.Equals(innBestilling.Navn));
-            
-            if (eksisterendeKunde.Count() < 1)
+            var eksisterendeKunde = db.Kunder.FirstOrDefault(p => p.Navn.Equals(innBestilling.Kunde.Navn));
+
+            if (eksisterendeKunde == null)
             {
-                Console.WriteLine("Kunde eksisterer, legger til");
-                var nyKunde = new Kunde()
+                Console.WriteLine("Kunde eksisterer ikke, legger til");
+                eksisterendeKunde = new Kunde()
                 {
-                    Navn = innBestilling.Navn,
-                    Tlf = innBestilling.Tlf,
-                    Adresse = innBestilling.Adresse
+                    Navn = innBestilling.Kunde.Navn,
+                    Tlf = innBestilling.Kunde.Tlf,
+                    Adresse = innBestilling.Kunde.Adresse
                 };
 
-                db.Kunder.Add(nyKunde);
+                db.Kunder.Add(eksisterendeKunde);
             }
 
-            Console.WriteLine("Bestilling legges til");
-            db.Bestillinger.Add(innBestilling);
+            db.Ordrer.Add(new Ordre()
+            {
+                Antall = innBestilling.Antall,
+                Kunde = eksisterendeKunde,
+                Type = innBestilling.Type,
+                Tykkelse = innBestilling.Tykkelse
+            });
 
             db.SaveChanges();
 

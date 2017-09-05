@@ -7,7 +7,6 @@ namespace HolbergsPizza.Models
 {
     public class Bestilling
     {
-        public int Id { get; set; }
         public string Pizza { get; set; }
         public string Tykkelse { get; set; }
         public int Antall { get; set; }
