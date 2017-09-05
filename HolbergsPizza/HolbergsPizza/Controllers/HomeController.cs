@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HolbergsPizza.Models;
 using System.Collections;
+using System.Diagnostics;
 
 namespace HolbergsPizza.Controllers
 {
@@ -32,31 +33,21 @@ namespace HolbergsPizza.Controllers
         }
 
         [HttpPost]
-        public ActionResult Bestill(Ordre innBestilling)
+        public ActionResult Bestill(Ordre nyOrdre)
         {
             var db = new DB();
-            var eksisterendeKunde = db.Kunder.FirstOrDefault(p => p.Navn.Equals(innBestilling.Kunde.Navn));
+            var eksisterendeKunde = db.Kunder.FirstOrDefault(p => p.Navn.Equals(nyOrdre.Kunde.Navn));
 
             if (eksisterendeKunde == null)
             {
-                Console.WriteLine("Kunde eksisterer ikke, legger til");
-                eksisterendeKunde = new Kunde()
-                {
-                    Navn = innBestilling.Kunde.Navn,
-                    Tlf = innBestilling.Kunde.Tlf,
-                    Adresse = innBestilling.Kunde.Adresse
-                };
-
-                db.Kunder.Add(eksisterendeKunde);
+                Debug.WriteLine("Kunde eksisterer ikke");
+                db.Kunder.Add(nyOrdre.Kunde);
+            } else
+            {
+                Debug.WriteLine("Kunde eksisterer");
             }
 
-            db.Ordrer.Add(new Ordre()
-            {
-                Antall = innBestilling.Antall,
-                Kunde = eksisterendeKunde,
-                Type = innBestilling.Type,
-                Tykkelse = innBestilling.Tykkelse
-            });
+            db.Ordrer.Add(nyOrdre);
 
             db.SaveChanges();
 
