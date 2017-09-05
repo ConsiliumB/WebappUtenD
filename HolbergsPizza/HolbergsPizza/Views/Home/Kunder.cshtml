@@ -1,0 +1,27 @@
+﻿@model List<HolbergsPizza.Models.Kunde>
+@{
+    ViewBag.Title = "Kunder";
+}
+
+<h2>Kunder</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn: </th>
+            <th>Adresse: </th>
+            <th>Tlf: </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var Kunde in Model)
+    {
+        <tr>
+            <td>@Kunde.Navn</td>
+            <td>@Kunde.Adresse</td>
+            <td>@Kunde.Tlf</td>
+            <td><a href="/Home/SlettKunde?id=@Kunde.Id" class="btn btn-danger">Slett</a></td>
+        </tr>
+    }
+</table>
+

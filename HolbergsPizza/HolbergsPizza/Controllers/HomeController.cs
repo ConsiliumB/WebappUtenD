@@ -20,16 +20,44 @@ namespace HolbergsPizza.Controllers
         public ActionResult Bestillinger()
         {
             var db = new DB();
+
             List<Ordre> Ordrer = db.Ordrer.ToList();
+
             return View(Ordrer);
+        }
+
+        public ActionResult Kunder()
+        {
+            var db = new DB();
+
+            List<Kunde> Kunder = db.Kunder.ToList();
+
+            return View(Kunder);
         }
 
         public ActionResult SlettBestilling(int id)
         {
             var db = new DB();
+
             db.Ordrer.Remove(db.Ordrer.Find(id));
             db.SaveChanges();
+
             return RedirectToAction("Bestillinger");
+        }
+        public ActionResult SlettKunde(int id)
+        {
+            var db = new DB();
+            var kunde = db.Kunder.Find(id);
+
+            foreach (var ordre in kunde.Ordrer.ToList())
+            {
+                db.Ordrer.Remove(ordre);
+            }
+
+            db.Kunder.Remove(kunde);
+            db.SaveChanges();
+
+            return RedirectToAction("Kunder");
         }
 
         [HttpPost]
@@ -38,17 +66,12 @@ namespace HolbergsPizza.Controllers
             var db = new DB();
             var eksisterendeKunde = db.Kunder.FirstOrDefault(p => p.Navn.Equals(nyOrdre.Kunde.Navn));
 
-            if (eksisterendeKunde == null)
+            if (eksisterendeKunde != null)
             {
-                Debug.WriteLine("Kunde eksisterer ikke");
-                db.Kunder.Add(nyOrdre.Kunde);
-            } else
-            {
-                Debug.WriteLine("Kunde eksisterer");
+                nyOrdre.Kunde = eksisterendeKunde;
             }
 
             db.Ordrer.Add(nyOrdre);
-
             db.SaveChanges();
 
             return RedirectToAction("bestillinger");
