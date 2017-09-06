@@ -47,14 +47,8 @@ namespace HolbergsPizza.Controllers
         public ActionResult SlettKunde(int id)
         {
             var db = new DB();
-            var kunde = db.Kunder.Find(id);
 
-            foreach (var ordre in kunde.Ordrer.ToList())
-            {
-                db.Ordrer.Remove(ordre);
-            }
-
-            db.Kunder.Remove(kunde);
+            db.Kunder.Remove(db.Kunder.Find(id));
             db.SaveChanges();
 
             return RedirectToAction("Kunder");
